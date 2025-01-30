@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>nikki color mixer</title>
+    
+    <style>
+.picker{
+  position:absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  
+  height: 189px;
+  width: 720px;
+}
+#display{
+  width: 50%;
+  height:100px ;
+  background: #730aa2 ;
+  transition: 100ms ;
+  margin-top: 30px ;
+  border:1px solid  #000;
+input{
+display: block;
+  width: 100%;
+  }
+  </style>
+  </head>
+  
+  <body>
+    <div class="picker">
+    
+      Red <input type="range" min="0" max="254" step="1"id="red" value="20">    
+      <h1 id="h1"></h1>
+    Green <input type="range" min="0" max="254"step="1" id="green" value="20">
+    <h1 id="h2"></h1>
+     Blue <input type="range" min="0" max="254"  style="1" id="blue" value="20">
+     <h1 id="h3"></h1>
+     <div id="display"></div>
+      </div>
+      </body>
+      
+      
+  <script>
+var input=document.querySelectorAll
+("input");
+
+
+ for(var i=0; i < input.length; i++){
+   
+   
+input[i].addEventListener
+("input",function(){
+  
+  
+  var red=document.getElementById
+  ("red").value,
+      green=document.getElementById
+      ("green").value,
+      blue=document.getElementById
+      ("blue").value;
+      
+      
+       var display=document.getElementById                                     
+       ("display");
+       
+       
+       display.style.background="rgb("+ red +","+ green +","+ blue +")";
+       var h1=document.getElementById('h1'),
+           h2=document.getElementById('h2'),
+           h3=document.getElementById('h3');
+           
+           h1.innerHTML=red;
+           h2.innerHTML=green;
+           h3.innerHTML=blue;
+       
+});
+}
+  </script>
+</html>
