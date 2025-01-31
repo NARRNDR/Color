@@ -1,13 +1,15 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <title>Hello World!</title>
     <link rel="stylesheet" href="styles.css" />
+    
   </head>
   <body>
-      <input type="text" id="input">
+      <input type="text" id="input"><br><br>
        <div>
-         <button>DEL</button>
+         <button>DE</button>
          <button>AC</button>
          <button>+</button>
          <button>-</button>
@@ -49,7 +51,7 @@ let string='';
 buttonsArray.forEach(btn=>{
   btn.addEventListener('click',(e)=>{
     
-    if(e.target.innerHTML=='DEL'){
+    if(e.target.innerHTML=='DE'){
       string=string.substring(0,string.length-1);
       input.value=string;
     }else if(e.target.innerHTML=='AC'){
@@ -58,6 +60,7 @@ buttonsArray.forEach(btn=>{
     }else if(e.target.innerHTML=='='){
       string=eval(string);
       input.value=string;
+      
     }
     
     else{
@@ -70,6 +73,19 @@ buttonsArray.forEach(btn=>{
   
 });
   </script>
-  <styles>
-
+<style>
+input{
+  width: 340px;
+  height: 80px;
+  border-radius: 5%;
+  font-size: 60px;
+}
+button{
+	height: 70px;
+	width: 85px;
+	border-radius: 20%;
+	font-size: 60px;
+}
+    
+  </style>
 </html>
