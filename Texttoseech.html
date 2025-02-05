@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+      <textarea></textarea><br>
+      <button onclick="texttospeech">SPEAK</button>            
+      <script>
+        let textarea=document.querySelectorAll("#textarea");
+        let button=document.queryselecrorAll("#button");
+        function texttospeech(){
+          const msg=new SpeechSynthesisUtterance;
+          msg.text=textarea.value;
+          msg.voice=speechSynthesis.getvoices()[0];
+          speechSynthesis.speaK(msg);
+        }
+      </script>
+      <style>
+        body{
+          place-items: center;
+        }
+        textarea{
+          height:100px;
+          width:300px;
+        }
+      </style>
+  </body>
+</html>
