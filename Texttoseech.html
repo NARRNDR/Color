@@ -6,10 +6,12 @@
   </head>
   <body>
       <textarea></textarea><br>
-      <button onclick="texttospeech">SPEAK</button>            
+      <button onclick="texttospeech">SPEAK</button>    
+    <a href="index.html"><h1>HOMEPAGE</h1></a>
       <script>
         let textarea=document.querySelectorAll("#textarea");
         let button=document.queryselecrorAll("#button");
+        
         function texttospeech(){
           const msg=new SpeechSynthesisUtterance;
           msg.text=textarea.value;
