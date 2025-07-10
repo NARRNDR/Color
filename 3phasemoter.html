@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+       <h1>watt</h1>
+       <input type="text" id="wa" value="746"><br><br>
+       <h1>hp</h1>
+       <input type="text" id="hp"><br><br>
+       <h1>volt</h1>
+       <input type="text" id="vo" value="415"><br><br>
+       <h1>pi</h1>
+       <input type="text" id="pi" value="1.732"><br><br>
+       <h1>pf</h1>
+       <input type="text" id="pf" value="0.8"><br><br>
+       <h1>Ampear</h1>
+       <input type="text" id="Ampear"><br><br>
+       <button>Result</button>
+       <button>cleare</button>
+      
+  </body>
+  <script>
+let wa=document.getElementById('wa');
+let hp=document.getElementById('hp');
+let vo=document.getElementById('vo');
+let pi=document.getElementById('pi');
+let pf=document.getElementById('pf');
+let watt='';
+let volt='';
+let power='';
+let Ampear=document.getElementById('Ampear');
+let button=document.querySelectorAll('button');
+let buttonsArray=Array.from(button);
+buttonsArray.forEach(btn=>{
+  btn.addEventListener('click',(e)=>{
+    if(e.target.innerHTML=='Result'){
+watt=wa.value*hp.value;
+volt=vo.value*pi.value*pf.value;
+power=watt/volt;
+Ampear.value=power;
+    
+    }else if(e.target.innerHTML=='cleare'){
+      power='';
+      Ampear.value=power;
+      
+    }
+  });
+  
+  
+});
+  </script>
+</html>
