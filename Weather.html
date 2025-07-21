@@ -16,37 +16,56 @@
       background: #d0e7ff;
       padding: 1em;
       border-radius: 8px;
+      margin-top: 1em;
     }
     h1 {
       text-align: center;
     }
+    #input {
+      width: 70%;
+      padding: 0.5em;
+      font-size: 1em;
+    }
+    #button {
+      padding: 0.5em 1em;
+      font-size: 1em;
+    }
   </style>
 </head>
 <body>
-  <h1>Current Weather in India</h1>
-  <div id="weather">Loading...</div>
+  <h1>Current Weather at location</h1>
+  <input id="input" type="text" placeholder="Enter location" />
+  <button id="button">Search</button>
+  <div id="weather">Enter a location and click search.</div>
 
   <script>
-    const apiUrl = "https://api.weatherapi.com/v1/current.json?key=579e75918373482da48112608251102&q=india&aqi=yes";
+    const input = document.getElementById("input");
+    const button = document.getElementById("button");
+    const weatherDiv = document.getElementById("weather");
+    const heading = document.querySelector("h1");
 
-    async function fetchWeather() {
+    async function fetchWeather(location) {
+      const apiKey = "579e75918373482da48112608251102"; // your API key
+      const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(location)}&aqi=yes`;
+
       try {
+        weatherDiv.textContent = "Loading...";
         const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
 
-        const weatherDiv = document.getElementById("weather");
-        const location = data.location.name + ", " + data.location.country;
+        const loc = data.location.name + ", " + data.location.country;
         const tempC = data.current.temp_c;
         const condition = data.current.condition.text;
         const humidity = data.current.humidity;
         const windKph = data.current.wind_kph;
         const airQuality = data.current.air_quality.pm2_5.toFixed(2);
 
+        heading.textContent = `Current Weather at ${loc}`;
         weatherDiv.innerHTML = `
-          <p><strong>Location:</strong> ${location}</p>
+          <p><strong>Location:</strong> ${loc}</p>
           <p><strong>Temperature:</strong> ${tempC} °C</p>
           <p><strong>Condition:</strong> ${condition}</p>
           <p><strong>Humidity:</strong> ${humidity}%</p>
@@ -54,12 +73,19 @@
           <p><strong>PM2.5 Air Quality:</strong> ${airQuality}</p>
         `;
       } catch (error) {
-        document.getElementById("weather").textContent = "Error loading weather data.";
+        weatherDiv.textContent = "Error loading weather data. Please check the location and try again.";
         console.error("Fetch error:", error);
       }
     }
 
-    fetchWeather();
+    button.addEventListener("click", () => {
+      const location = input.value.trim();
+      if (location) {
+        fetchWeather(location);
+      } else {
+        weatherDiv.textContent = "Please enter a location.";
+      }
+    });
   </script>
 </body>
 </html>
