@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weather API Data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 2em auto;
+      padding: 1em;
+      background: #f0f8ff;
+    }
+    #weather {
+      background: #d0e7ff;
+      padding: 1em;
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Current Weather in India</h1>
+  <div id="weather">Loading...</div>
+
+  <script>
+    const apiUrl = "https://api.weatherapi.com/v1/current.json?key=579e75918373482da48112608251102&q=india&aqi=yes";
+
+    async function fetchWeather() {
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+
+        const weatherDiv = document.getElementById("weather");
+        const location = data.location.name + ", " + data.location.country;
+        const tempC = data.current.temp_c;
+        const condition = data.current.condition.text;
+        const humidity = data.current.humidity;
+        const windKph = data.current.wind_kph;
+        const airQuality = data.current.air_quality.pm2_5.toFixed(2);
+
+        weatherDiv.innerHTML = `
+          <p><strong>Location:</strong> ${location}</p>
+          <p><strong>Temperature:</strong> ${tempC} °C</p>
+          <p><strong>Condition:</strong> ${condition}</p>
+          <p><strong>Humidity:</strong> ${humidity}%</p>
+          <p><strong>Wind Speed:</strong> ${windKph} kph</p>
+          <p><strong>PM2.5 Air Quality:</strong> ${airQuality}</p>
+        `;
+      } catch (error) {
+        document.getElementById("weather").textContent = "Error loading weather data.";
+        console.error("Fetch error:", error);
+      }
+    }
+
+    fetchWeather();
+  </script>
+</body>
+</html>
